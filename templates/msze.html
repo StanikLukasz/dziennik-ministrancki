@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Msze</title>
+</head>
+<body>
+<h1>Msze</h1>
+<form action="msza" method="post">
+    <input type="text" id="dzien_tygodnia" name="dzien_tygodnia">
+    <input type="text" id="godzina" name="godzina">
+    <input type="submit" value="Dodaj msze">
+</form>
+<table id="listaMszy">
+    <caption>Lista ministrantów</caption>
+    <tr>
+        <th>Dzień</th>
+        <th>Godzina</th>
+    </tr>
+    {% for msza in msze %}
+        <tr>
+            <td>{{ msza["dzien_tygodnia"] }}</td>
+            <td>{{ msza["godzina"] }}</td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
