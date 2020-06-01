@@ -39,7 +39,7 @@ def dodaj_ministranta():
 
 @app.route('/msze', methods=["POST", "GET"])
 def dodaj_msze():
-    if request.method == "POST":
+    if request.method == "GET":
         db.msze.insert_one({
             "dzien_tygodnia": request.form["dzien_tygodnia"],
             "godzina": request.form["godzina"],
