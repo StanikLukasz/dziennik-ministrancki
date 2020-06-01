@@ -55,7 +55,9 @@ def dodaj_msza():
 @app.route('/sluzby')
 def strona_sluzby():
     sluzby = db.sluzby.find()
-    return render_template("sluzby.html", sluzby=sluzby)
+    ministranci = db.uzytkownicy.find()
+    imiona = db.uzytkownicy.distinct('imie')
+    return render_template("sluzby.html", sluzby=sluzby, imiona=imiona, ministranci=ministranci)
 
 @app.route('/sluzba', methods=["POST", "GET"])
 def dodaj_sluzba():

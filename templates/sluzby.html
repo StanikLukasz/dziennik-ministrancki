@@ -14,9 +14,14 @@
 {# Main page#}
 <h1>Służby</h1>
 <form action="sluzba" method="post">
-    <input type="text" id="imie" name="imie">
+    <input type="text" id="imie" name="imie" list="imiona"/>
+    <datalist id="imiona">
+     {% for ministrant in ministranci %}
+        <option>{{ministrant["imie"]}} {{ ministrant["nazwisko"] }}</option>
+    {% endfor %}
+    </datalist>
     <input type="text" id="nazwisko" name="nazwisko">
-    <input type="text" id="dzien_tygodnia" name="dzien_tygodnia" value="dni-tygodnia">
+    <input type="text" id="dzien_tygodnia" name="dzien_tygodnia" list="dni-tygodnia"/>
     <datalist id="dni-tygodnia">
         <option>Poniedziałek</option>
         <option>Wtorek</option>
