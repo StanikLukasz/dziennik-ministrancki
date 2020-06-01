@@ -16,7 +16,16 @@
 <form action="sluzba" method="post">
     <input type="text" id="imie" name="imie">
     <input type="text" id="nazwisko" name="nazwisko">
-    <input type="text" id="dzien_tygodnia" name="dzien_tygodnia">
+    <input type="text" id="dzien_tygodnia" name="dzien_tygodnia" value="dni-tygodnia">
+    <datalist id="dni-tygodnia">
+        <option>Poniedziałek</option>
+        <option>Wtorek</option>
+        <option>Środa</option>
+        <option>Czwartek</option>
+        <option>Piątek</option>
+        <option>Sobota</option>
+        <option>Nieidzela</option>
+    </datalist>
     <input type="text" id="godzina" name="godzina">
     <input type="submit" value="Dodaj sluzbe">
 </form>
