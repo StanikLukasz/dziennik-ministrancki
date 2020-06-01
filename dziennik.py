@@ -56,15 +56,15 @@ def dodaj_msza():
 def strona_sluzby():
     sluzby = db.sluzby.find()
     ministranci = db.uzytkownicy.find()
-    imiona = db.uzytkownicy.distinct('imie')
-    return render_template("sluzby.html", sluzby=sluzby, imiona=imiona, ministranci=ministranci)
+    msze = db.msze.find()
+    return render_template("sluzby.html", sluzby=sluzby, msze=msze, ministranci=ministranci)
 
 @app.route('/sluzba', methods=["POST", "GET"])
 def dodaj_sluzba():
     if request.method == "POST":
         db.sluzby.insert_one({
-            "imie": request.form["imie"],
-            "nazwisko": request.form["nazwisko"],
+            "imie_nazwisko": request.form["imie_nazwisko"],
+            # "nazwisko": request.form["nazwisko"],
             "dzien_tygodnia": request.form["dzien_tygodnia"],
             "godzina": request.form["godzina"],
         })

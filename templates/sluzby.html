@@ -20,18 +20,12 @@
         <option>{{ministrant["imie"]}} {{ ministrant["nazwisko"] }}</option>
     {% endfor %}
     </datalist>
-    <input type="text" id="nazwisko" name="nazwisko">
-    <input type="text" id="dzien_tygodnia" name="dzien_tygodnia" list="dni-tygodnia"/>
-    <datalist id="dni-tygodnia">
-        <option>Poniedziałek</option>
-        <option>Wtorek</option>
-        <option>Środa</option>
-        <option>Czwartek</option>
-        <option>Piątek</option>
-        <option>Sobota</option>
-        <option>Nieidzela</option>
+    <input type="text" id="dzien_tygodnia" name="dzien_tygodnia" list="msze-tygodnia"/>
+    <datalist id="msze-tygodnia">
+    {% for msza in msze %}
+        <option>{{msza["dzien_tygodnia"]}} {{ msza["godzina"] }}</option>
+    {% endfor %}
     </datalist>
-    <input type="text" id="godzina" name="godzina">
     <input type="submit" value="Dodaj sluzbe">
 </form>
 <table id="lista_sluzb">
