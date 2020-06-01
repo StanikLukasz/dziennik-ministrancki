@@ -48,7 +48,9 @@ def dodaj_msza():
             "dzien_tygodnia": request.form["dzien_tygodnia"],
             "godzina": request.form["godzina"],
         })
-
+        return redirect("/msze")
+    elif request.method =="GET":
+        return redirect("/msze")
 
 if __name__ == '__main__':
     app.run()
