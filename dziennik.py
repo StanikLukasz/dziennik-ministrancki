@@ -21,7 +21,19 @@ db = mongo.db
 
 @app.route('/')
 def main_page():
-    return render_template("index.html")
+    ministranci = db.uzytkownicy.find()
+    return render_template("index.html", ministranci=ministranci)
+
+
+@app.route('/ministrant', methods=["POST", "GET"])
+def dodaj_ministranta():
+    if request.method == "POST":
+        db.uzytkownicy.insert_one({
+            "imie": request.form["imie"],
+            "nazwisko": request.form["nazwisko"],
+            "rola": "ministrant"
+        })
+        return redirect(url_for("main_page"))
 
 
 if __name__ == '__main__':
