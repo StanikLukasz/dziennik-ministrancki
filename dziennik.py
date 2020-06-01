@@ -52,5 +52,23 @@ def dodaj_msza():
     elif request.method =="GET":
         return redirect("/msze")
 
+@app.route('/sluzby')
+def strona_sluzby():
+    sluzby = db.sluzby.find()
+    return render_template("sluzby.html", sluzby=sluzby)
+
+@app.route('/sluzba', methods=["POST", "GET"])
+def dodaj_sluzba():
+    if request.method == "POST":
+        db.sluzby.insert_one({
+            "imie": request.form["imie"],
+            "nazwisko": request.form["nazwisko"],
+            "dzien_tygodnia": request.form["dzien_tygodnia"],
+            "godzina": request.form["godzina"],
+        })
+        return redirect("/sluzby")
+    elif request.method =="GET":
+        return redirect("/sluzby")
+
 if __name__ == '__main__':
     app.run()

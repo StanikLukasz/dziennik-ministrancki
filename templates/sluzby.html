@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Msze</title>
+    <title>Dodaj Sluzbe</title>
 </head>
 <body>
 {# Main menu#}
@@ -12,22 +12,25 @@
 <a href="/sluzby">Sluzby</a>
 
 {# Main page#}
-<h1>Msze</h1>
-<form action="msza" method="post">
+<h1>Służby</h1>
+<form action="sluzba" method="post">
+    <input type="text" id="imie" name="imie">
+    <input type="text" id="nazwisko" name="nazwisko">
     <input type="text" id="dzien_tygodnia" name="dzien_tygodnia">
     <input type="text" id="godzina" name="godzina">
-    <input type="submit" value="Dodaj msze">
+    <input type="submit" value="Dodaj sluzbe">
 </form>
-<table id="listaMszy">
-    <caption>Lista mszy</caption>
+<table id="lista_sluzb">
+    <caption>Lista służb</caption>
     <tr>
+        <th>Imie i Nazwisko</th>
         <th>Dzień</th>
         <th>Godzina</th>
     </tr>
-    {% for msza in msze %}
+    {% for sluzba in sluzby %}
         <tr>
-            <td>{{ msza["dzien_tygodnia"] }}</td>
-            <td>{{ msza["godzina"] }}</td>
+            <td>{{ sluzba["dzien_tygodnia"] }}</td>
+            <td>{{ sluzba["godzina"] }}</td>
         </tr>
     {% endfor %}
 </table>
