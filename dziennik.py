@@ -78,7 +78,7 @@ def dodaj_sluzba():
     if request.method == "POST":
         # rozwiazanie na duplikaty
         doc = {"ministrant_id": ObjectId(request.form["ministrant"]), "msza_id": ObjectId(request.form["msza"])}
-        db.sluzby.update_one(doc, {"$set":doc}, upsert=True)
+        db.sluzby.update_one(doc, {"$set": doc}, upsert=True)
         # OLD SOLUTION
         # db.sluzby.insert_one({
         #     "ministrant_id": request.form["ministrant"],
