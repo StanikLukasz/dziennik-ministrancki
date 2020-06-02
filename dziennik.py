@@ -52,9 +52,16 @@ def dodaj_sluzba():
     ministranci = db.uzytkownicy.find()
     msze = db.msze.find()
     sluzby = db.sluzby.find()
-    # for sluzba in sluzby:
-        # sluzba["ministrant"] = sluzba["ministrant_id"] #db.uzytkownicy.find({"_id": sluzba["ministrant_id"]})
-        # sluzba["msza"] = sluzba["msza_id"] #db.msze.find({"_id": sluzba["msza_id"]})
+    sluzby_display = [
+        {
+            "ministrant": db.uzytkownicy.find_one({"_id": ObjectId(sluzba["ministrant_id"])})["imie"] + " " + db.uzytkownicy.find_one({"_id": ObjectId(sluzba["ministrant_id"])})["nazwisko"],
+            "msza": db.msze.find_one({"_id": ObjectId(sluzba["msza_id"])})["dzien_tygodnia"] + " " + db.msze.find_one({"_id": ObjectId(sluzba["msza_id"])})["godzina"]
+        }
+        for sluzba in sluzby
+    ]
+
+    # db.uzytkownicy.find({"_id": sluzba["ministrant_id"]})
+    # db.msze.find({"_id": sluzba["msza_id"]})
     if request.method == "POST":
         # rozwiazanie na duplikaty
         doc = {"ministrant_id": request.form["ministrant"], "msza_id": request.form["msza"]}
