@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block body %}
+    {# Main page#}
+    <h1>Obecności</h1>
+    <form action="obecnosc" method="post">
+    {#    <input type="text" id="ministrant" name="ministrant" list="ministranci"/>#}
+        <select id="ministrant" name="ministrant">
+        {% for ministrant in ministranci %}
+            <option value="{{ministrant["_id"]}}">{{ ministrant["imie"] }} {{ ministrant["nazwisko"] }}</option>
+        {% endfor %}
+        </select>
+    {#    <input type="text" id="dzien_tygodnia" name="dzien_tygodnia" list="msze-tygodnia"/>#}
+        <select id="msza" name="msza">
+        {% for msza in msze %}
+            <option value="{{msza["_id"]}}">{{ msza["dzien_tygodnia"] }} {{ msza["godzina"] }}</option>
+        {% endfor %}
+        </select>
+        <input type="submit" value="Zarejestruj obecnosc">
+    </form>
+    <table id="lista_obecnosci">
+        <caption>Lista obecności</caption>
+        <tr>
+            <th>Ministrant</th>
+            <th>Msza</th>
+        </tr>
+        {% for obecnosc in obecnosci %}
+            <tr>
+                <td>{{ obecnosc["ministrant"] }}</td>
+                <td>{{ obecnosc["msza"] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -60,22 +60,39 @@ def dodaj_sluzba():
         }
         for sluzba in sluzby
     ]
-
-    # db.uzytkownicy.find({"_id": sluzba["ministrant_id"]})
-    # db.msze.find({"_id": sluzba["msza_id"]})
     if request.method == "POST":
         # rozwiazanie na duplikaty
-        doc = {"ministrant_id": request.form["ministrant"], "msza_id": request.form["msza"]}
-        db.sluzby.updateOne(doc, doc, {upsert: true})
-        # db.sluzby.insert_one({
-        #     "ministrant_id": request.form["ministrant"],
-        #     "msza_id": request.form["msza"]
-        # })
-    return render_template("sluzby.html", ministranci=ministranci, msze=msze, sluzby=sluzby)
+        # doc = {"ministrant_id": request.form["ministrant"], "msza_id": request.form["msza"]}
+        # db.sluzby.update_one(doc, doc, {"$upsert": True})
+        db.sluzby.insert_one({
+            "ministrant_id": request.form["ministrant"],
+            "msza_id": request.form["msza"]
+        })
+    return render_template("sluzby.html", ministranci=ministranci, msze=msze, sluzby=sluzby_display)
 
+
+@app.route('/obecnosc', methods=["POST", "GET"])
+def dodaj_obecnosc():
+    ministranci = db.uzytkownicy.find()
+    msze = db.msze.find()
+    obecnosci = db.obecnosci.find()
+    obecnosci_display = [
+        {
+            "ministrant": db.uzytkownicy.find_one({"_id": ObjectId(obecnosc["ministrant_id"])})["imie"] + " " + db.uzytkownicy.find_one({"_id": ObjectId(obecnosc["ministrant_id"])})["nazwisko"],
+            "msza": db.msze.find_one({"_id": ObjectId(obecnosc["msza_id"])})["dzien_tygodnia"] + " " + db.msze.find_one({"_id": ObjectId(obecnosc["msza_id"])})["godzina"]
+        }
+        for obecnosc in obecnosci
+    ]
+    if request.method == "POST":
+        db.obecnosci.insert_one({
+            "ministrant_id": request.form["ministrant"],
+            "msza_id": request.form["msza"]
+        })
+    return render_template("obecnosci.html", ministranci=ministranci, msze=msze, obecnosci=obecnosci_display)
 
 if __name__ == '__main__':
     # db.uzytkownicy.remove()
     # db.msze.remove()
     # db.sluzby.remove()
+    # db.obecnosci.remove()
     app.run()
