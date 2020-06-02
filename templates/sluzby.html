@@ -28,6 +28,7 @@
     </select>
     <input type="submit" value="Dodaj służbę">
 </form>
+    <p> ggg{{ sluzby_display }}</p>
 <table id="lista_sluzb">
     <caption>Lista służb</caption>
     <tr>
@@ -36,8 +37,8 @@
     </tr>
     {% for sluzba in sluzby %}
         <tr>
-            <td>{{ sluzba["ministrant_id"] }}</td>
-            <td>{{ sluzba["msza_id"] }}</td>
+            <td>{{ sluzba["ministrant"] }}</td>
+            <td>{{ sluzba["msza"] }}</td>
         </tr>
     {% endfor %}
 </table>
