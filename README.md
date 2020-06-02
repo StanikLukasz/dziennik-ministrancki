@@ -1,2 +1,4 @@
 # dziennik-ministrancki
-<3 
+Autorzy:
+Łukasz Stanik
+Mateusz Obrzut
