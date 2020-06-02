@@ -51,10 +51,15 @@ def dodaj_ministranta():
 def dodaj_msza():
     msze = db.msze.find()
     if request.method == "POST":
+        # old solution
         db.msze.insert_one({
             "dzien_tygodnia": request.form["dzien_tygodnia"],
             "godzina": request.form["godzina"],
         })
+        # x
+        # # rozwiazanie na duplikaty
+        # doc = {"ministrant_id": ObjectId(request.form["ministrant"]), "msza_id": ObjectId(request.form["msza"])}
+        # db.sluzby.update_one(doc, {"$set": doc}, upsert = True)
     return render_template("msze.html", msze=msze)
 
 
