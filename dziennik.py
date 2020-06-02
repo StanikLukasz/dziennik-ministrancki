@@ -72,7 +72,7 @@ def dodaj_sluzba():
     ]
     if request.method == "POST":
         # rozwiazanie na duplikaty
-        doc = {"ministrant_id": request.form["ministrant"], "msza_id": request.form["msza"]}
+        doc = {"ministrant_id": ObjectId(request.form["ministrant"]), "msza_id": ObjectId(request.form["msza"])}
         db.sluzby.update_one(doc, {"$set":doc}, upsert=True)
         # OLD SOLUTION
         # db.sluzby.insert_one({
@@ -96,8 +96,8 @@ def dodaj_obecnosc():
     ]
     if request.method == "POST":
         db.obecnosci.insert_one({
-            "ministrant_id": request.form["ministrant"],
-            "msza_id": request.form["msza"]
+            "ministrant_id": ObjectId(request.form["ministrant"]),
+            "msza_id": ObjectId(request.form["msza"])
         })
     return render_template("obecnosci.html", ministranci=ministranci, msze=msze, obecnosci=obecnosci_display)
 
