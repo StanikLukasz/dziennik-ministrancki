@@ -56,10 +56,13 @@ def dodaj_sluzba():
         # sluzba["ministrant"] = sluzba["ministrant_id"] #db.uzytkownicy.find({"_id": sluzba["ministrant_id"]})
         # sluzba["msza"] = sluzba["msza_id"] #db.msze.find({"_id": sluzba["msza_id"]})
     if request.method == "POST":
-        db.sluzby.insert_one({
-            "ministrant_id": request.form["ministrant"],
-            "msza_id": request.form["msza"]
-        })
+        # rozwiazanie na duplikaty
+        doc = {"ministrant_id": request.form["ministrant"], "msza_id": request.form["msza"]}
+        db.sluzby.updateOne(doc, doc, {upsert: true})
+        # db.sluzby.insert_one({
+        #     "ministrant_id": request.form["ministrant"],
+        #     "msza_id": request.form["msza"]
+        # })
     return render_template("sluzby.html", ministranci=ministranci, msze=msze, sluzby=sluzby)
 
 
