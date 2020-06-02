@@ -62,12 +62,13 @@ def dodaj_sluzba():
     ]
     if request.method == "POST":
         # rozwiazanie na duplikaty
-        # doc = {"ministrant_id": request.form["ministrant"], "msza_id": request.form["msza"]}
-        # db.sluzby.update_one(doc, doc, {"$upsert": True})
-        db.sluzby.insert_one({
-            "ministrant_id": request.form["ministrant"],
-            "msza_id": request.form["msza"]
-        })
+        doc = {"ministrant_id": request.form["ministrant"], "msza_id": request.form["msza"]}
+        db.sluzby.update_one(doc, {"$set":doc}, upsert=True)
+        # OLD SOLUTION
+        # db.sluzby.insert_one({
+        #     "ministrant_id": request.form["ministrant"],
+        #     "msza_id": request.form["msza"]
+        # })
     return render_template("sluzby.html", ministranci=ministranci, msze=msze, sluzby=sluzby_display)
 
 
