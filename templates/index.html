@@ -3,22 +3,4 @@
 {% block body %}
     {# Main page#}
     <h1>Strona główna</h1>
-    <form action="ministrant" method ="post">
-        <input type="text" id="imie" name="imie">
-        <input type="text" id="nazwisko" name="nazwisko">
-        <input type="submit" value="Dodaj ministranta">
-    </form>
-    <table id="listaMinistrantow">
-        <caption>Lista ministrantów</caption>
-        <tr>
-            <th>Imię</th>
-            <th>Naziwsko</th>
-        </tr>
-        {% for ministrant in ministranci %}
-            <tr>
-                <td>{{ ministrant["imie"] }}</td>
-                <td>{{ ministrant["nazwisko"] }}</td>
-            </tr>
-        {% endfor %}
-    </table>
 {% endblock %}

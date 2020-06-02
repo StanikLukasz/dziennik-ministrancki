@@ -7,6 +7,8 @@ import pprint
 import json
 import os
 
+import punktacja
+
 print = pprint.pprint
 
 app = Flask(__name__)
@@ -22,19 +24,27 @@ db = mongo.db
 
 @app.route('/')
 def main_page():
-    ministranci = db.uzytkownicy.find()
-    return render_template("index.html", ministranci=ministranci)
+    return render_template("index.html")
 
 
 @app.route('/ministrant', methods=["POST", "GET"])
 def dodaj_ministranta():
+    ministranci = db.uzytkownicy.find()
+    ministranci_display = [
+        {
+            "imie": ministrant["imie"],
+            "nazwisko": ministrant["nazwisko"],
+            "bilans": punktacja.oblicz_bilans_punktow(db=db, ministrant_id=ministrant["_id"])
+        }
+        for ministrant in ministranci
+    ]
     if request.method == "POST":
         db.uzytkownicy.insert_one({
             "imie": request.form["imie"],
             "nazwisko": request.form["nazwisko"],
             "rola": "ministrant"
         })
-        return redirect(url_for("main_page"))
+    return render_template("ministranci.html", ministranci=ministranci_display)
 
 
 @app.route('/msza', methods=["POST", "GET"])
