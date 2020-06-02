@@ -1,9 +1,7 @@
 # dziennik-ministrancki
-Autorzy:
-Łukasz Stanik
-Mateusz Obrzut
+Autorzy: Łukasz Stanik, Mateusz Obrzut
 
-##Use case
+## Use case
 Ministranci w większości parafii są punktowani za wywiązywanie się z obowiązków -
 w szczególności za przychodzenie lub nie na obowiązkowe msze.
 
@@ -12,16 +10,15 @@ w szczególności za przychodzenie lub nie na obowiązkowe msze.
 - definiowanie terminów mszy (dzień tygodnia + godzina)
 - przypisywanie użytkownikom obowiązkowych mszy
 - rejestrowanie obecności ministrantów na mszach
-- kalkulowanie punktacji i aktualizowanie bilansu punktów na kontach ministrantów
+- kalkulowanie punktacji i wyświetlanie bilansu punktów ministrantów
 
 ## Stos technologiczny
 - MongoDB
 - Python
 - Flask
 
-
 ## Struktura bazy danych
-#### uzytkownicy
+### uzytkownicy
 Kolekcja zawierająca dane ministrantów w systemie
 
 Dokument zawierający wymagane pola:
@@ -32,7 +29,7 @@ Dokument zawierający wymagane pola:
         "nazwisko": string
     }
     
-#### msze
+### msze
 Kolekcja zawierająca terminy mszy
 
 Dokument zawierający wymagane pola:
@@ -43,7 +40,7 @@ Dokument zawierający wymagane pola:
         "godzina": string # HH:MM
     }
     
-#### sluzby
+### sluzby
 Kolekcja zawierająca służby (przypisania: ministrant <-> obowiązkowa msza)
 
 Dokument zawierający wymagane pola:
@@ -54,7 +51,7 @@ Dokument zawierający wymagane pola:
         "msza_id": ObjectId(...) # referencja do dokumentu z kolekcji msze
     }
 
-#### obecnosci
+### obecnosci
 Kolekcja zawierająca zarejestrowane obecności na mszach
 
 Dokument zawierający wymagane pola:
@@ -67,8 +64,8 @@ Dokument zawierający wymagane pola:
 
 ## Opis działania
 ### Bilans punktów
-Dla każdego ministranta obliczny jest bilans punktów na podstawie zdefiniowanych terminów obowiązkowych mszy 
-oraz zarejestrowanych obecności. Bilans obliczany jest według wzoru:
+Dla każdego ministranta obliczany jest bilans punktów na podstawie zdefiniowanych terminów obowiązkowych mszy 
+(służb) oraz zarejestrowanych obecności. Bilans obliczany jest według wzoru:
 
     BIL = 5*OB + 2*NOB
     
