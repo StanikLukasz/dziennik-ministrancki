@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    {# Main menu#}
+    <div class="topnav">
+        <a href="/">Dodaj ministranta</a>
+        <a href="/msza">Msze</a>
+        <a href="/sluzba">Służby</a>
+        <a href="/obecnosc">Zarejestruj obecność</a>
+    </div>
+    {%  block body %}
+    {%  endblock %}
+</body>
+</html>

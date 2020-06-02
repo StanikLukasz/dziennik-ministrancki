@@ -1,48 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dodaj Sluzbe</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-{# Main menu#}
-<div class="topnav">
-    <a href="/">Dodaj Ministranta</a>
-    <a href="/msza">Msze</a>
-    <a href="/sluzba">Służby</a>
-</div>
+{% extends "base.html" %}
 
-{# Main page#}
-<h1>Służby</h1>
-<form action="sluzba" method="post">
+{% block body %}
+    {# Main page#}
+    <h1>Służby</h1>
+    <form action="sluzba" method="post">
     {#    <input type="text" id="ministrant" name="ministrant" list="ministranci"/>#}
-    <select id="ministrant" name="ministrant">
+        <select id="ministrant" name="ministrant">
         {% for ministrant in ministranci %}
-            <option value="{{ ministrant["_id"] }}">{{ ministrant["imie"] }} {{ ministrant["nazwisko"] }}</option>
+            <option value="{{ministrant["_id"]}}">{{ ministrant["imie"] }} {{ ministrant["nazwisko"] }}</option>
         {% endfor %}
-    </select>
+        </select>
     {#    <input type="text" id="dzien_tygodnia" name="dzien_tygodnia" list="msze-tygodnia"/>#}
-    <select id="msza" name="msza">
+        <select id="msza" name="msza">
         {% for msza in msze %}
-            <option value="{{ msza["_id"] }}">{{ msza["dzien_tygodnia"] }} {{ msza["godzina"] }}</option>
+            <option value="{{msza["_id"]}}">{{ msza["dzien_tygodnia"] }} {{ msza["godzina"] }}</option>
         {% endfor %}
-    </select>
-    <input type="submit" value="Dodaj służbę">
-</form>
-    <p> ggg{{ sluzby_display }}</p>
-<table id="lista_sluzb">
-    <caption>Lista służb</caption>
-    <tr>
-        <th>Ministrant</th>
-        <th>Msza</th>
-    </tr>
-    {% for sluzba in sluzby %}
+        </select>
+        <input type="submit" value="Dodaj służbę">
+    </form>
+    <table id="lista_sluzb">
+        <caption>Lista służb</caption>
         <tr>
-            <td>{{ sluzba["ministrant"] }}</td>
-            <td>{{ sluzba["msza"] }}</td>
+            <th>Ministrant</th>
+            <th>Msza</th>
         </tr>
-    {% endfor %}
-</table>
-</body>
-</html>
+        {% for sluzba in sluzby %}
+            <tr>
+                <td>{{ sluzba["ministrant"] }}</td>
+                <td>{{ sluzba["msza"] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

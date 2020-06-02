@@ -1,47 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Msze</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% extends "base.html" %}
 
-</head>
-<body>
-{# Main menu#}
-<div class="topnav">
-    <a href="/">Dodaj ministranta</a>
-    <a href="/msza">Msze</a>
-    <a href="/sluzba">Służby</a>
-</div>
-
-{# Main page#}
-<h1>Msze</h1>
-<form action="msza" method="post">
-    <select id="dzien_tygodnia" name="dzien_tygodnia">
-        <option>Poniedziałek</option>
-        <option>Wtorek</option>
-        <option>Środa</option>
-        <option>Czwartek</option>
-        <option>Piątek</option>
-        <option>Sobota</option>
-        <option>Niedziela</option>
-    </select>
-    <input type="text" id="godzina" name="godzina">
-    <input type="submit" value="Dodaj msze">
-</form>
-{#Table #}
-<table id="listaMszy">
-    <caption>Lista mszy</caption>
-    <tr>
-        <th>Dzień</th>
-        <th>Godzina</th>
-    </tr>
-    {% for msza in msze %}
+{% block body %}
+    {# Main page#}
+    <h1>Msze</h1>
+    <form action="msza" method="post">
+        <select id="dzien_tygodnia" name="dzien_tygodnia">
+            <option>Poniedziałek</option>
+            <option>Wtorek</option>
+            <option>Środa</option>
+            <option>Czwartek</option>
+            <option>Piątek</option>
+            <option>Sobota</option>
+            <option>Niedziela</option>
+        </select>
+        <input type="text" id="godzina" name="godzina">
+        <input type="submit" value="Dodaj msze">
+    </form>
+    {#Table #}
+    <table id="listaMszy">
+        <caption>Lista mszy</caption>
         <tr>
-            <td>{{ msza["dzien_tygodnia"] }}</td>
-            <td>{{ msza["godzina"] }}</td>
+            <th>Dzień</th>
+            <th>Godzina</th>
         </tr>
-    {% endfor %}
-</table>
-</body>
-</html>
+        {% for msza in msze %}
+            <tr>
+                <td>{{ msza["dzien_tygodnia"] }}</td>
+                <td>{{ msza["godzina"] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
