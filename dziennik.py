@@ -36,41 +36,35 @@ def dodaj_ministranta():
         return redirect(url_for("main_page"))
 
 
-@app.route('/msze')
-def strona_msze():
-    msze = db.msze.find()
-    return render_template("msze.html", msze=msze)
-
 @app.route('/msza', methods=["POST", "GET"])
 def dodaj_msza():
+    msze = db.msze.find()
     if request.method == "POST":
         db.msze.insert_one({
             "dzien_tygodnia": request.form["dzien_tygodnia"],
             "godzina": request.form["godzina"],
         })
-        return redirect("/msze")
-    elif request.method =="GET":
-        return redirect("/msze")
+    return render_template("msze.html", msze=msze)
 
-@app.route('/sluzby')
-def strona_sluzby():
-    sluzby = db.sluzby.find()
-    ministranci = db.uzytkownicy.find()
-    msze = db.msze.find()
-    return render_template("sluzby.html", sluzby=sluzby, msze=msze, ministranci=ministranci)
 
 @app.route('/sluzba', methods=["POST", "GET"])
 def dodaj_sluzba():
+    ministranci = db.uzytkownicy.find()
+    msze = db.msze.find()
+    sluzby = db.sluzby.find()
+    # for sluzba in sluzby:
+        # sluzba["ministrant"] = sluzba["ministrant_id"] #db.uzytkownicy.find({"_id": sluzba["ministrant_id"]})
+        # sluzba["msza"] = sluzba["msza_id"] #db.msze.find({"_id": sluzba["msza_id"]})
     if request.method == "POST":
         db.sluzby.insert_one({
-            "imie_nazwisko": request.form["imie_nazwisko"],
-            # "nazwisko": request.form["nazwisko"],
-            "dzien_tygodnia": request.form["dzien_tygodnia"],
-            "godzina": request.form["godzina"],
+            "ministrant_id": request.form["ministrant"],
+            "msza_id": request.form["msza"]
         })
-        return redirect("/sluzby")
-    elif request.method =="GET":
-        return redirect("/sluzby")
+    return render_template("sluzby.html", ministranci=ministranci, msze=msze, sluzby=sluzby)
+
 
 if __name__ == '__main__':
+    # db.uzytkownicy.remove()
+    # db.msze.remove()
+    # db.sluzby.remove()
     app.run()

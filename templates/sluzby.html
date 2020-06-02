@@ -55,40 +55,39 @@
 </head>
 <body>
 {# Main menu#}
-<div class="topnav">
+    <div class="topnav">
     <a href="/">Dodaj Ministranta</a>
-    <a href="/msze">Msze</a>
-    <a href="/sluzby">Sluzby</a>
+    <a href="/msza">Msze</a>
+    <a href="/sluzba">Służby</a>
 </div>
 
 {# Main page#}
 <h1>Służby</h1>
 <form action="sluzba" method="post">
-    <input type="text" id="imie" name="imie" list="imiona"/>
-    <datalist id="imiona">
-     {% for ministrant in ministranci %}
-        <option>{{ministrant["imie"]}} {{ ministrant["nazwisko"] }}</option>
+{#    <input type="text" id="ministrant" name="ministrant" list="ministranci"/>#}
+    <select id="ministrant" name="ministrant">
+    {% for ministrant in ministranci %}
+        <option value="{{ministrant["_id"]}}">{{ ministrant["imie"] }} {{ ministrant["nazwisko"] }}</option>
     {% endfor %}
-    </datalist>
-    <input type="text" id="dzien_tygodnia" name="dzien_tygodnia" list="msze-tygodnia"/>
-    <datalist id="msze-tygodnia">
+    </select>
+{#    <input type="text" id="dzien_tygodnia" name="dzien_tygodnia" list="msze-tygodnia"/>#}
+    <select id="msza" name="msza">
     {% for msza in msze %}
-        <option>{{msza["dzien_tygodnia"]}} {{ msza["godzina"] }}</option>
+        <option value="{{msza["_id"]}}">{{ msza["dzien_tygodnia"] }} {{ msza["godzina"] }}</option>
     {% endfor %}
-    </datalist>
-    <input type="submit" value="Dodaj sluzbe">
+    </select>
+    <input type="submit" value="Dodaj służbę">
 </form>
 <table id="lista_sluzb">
     <caption>Lista służb</caption>
     <tr>
-        <th>Imie i Nazwisko</th>
-        <th>Dzień</th>
-        <th>Godzina</th>
+        <th>Ministrant</th>
+        <th>Msza</th>
     </tr>
     {% for sluzba in sluzby %}
         <tr>
-            <td>{{ sluzba["dzien_tygodnia"] }}</td>
-            <td>{{ sluzba["godzina"] }}</td>
+            <td>{{ sluzba["ministrant_id"] }}</td>
+            <td>{{ sluzba["msza_id"] }}</td>
         </tr>
     {% endfor %}
 </table>

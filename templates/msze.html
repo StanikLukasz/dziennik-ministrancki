@@ -55,25 +55,24 @@
 </head>
 <body>
 {# Main menu#}
-<div class="topnav">
-    <a href="/">Dodaj Ministranta</a>
-    <a href="/msze">Msze</a>
-    <a href="/sluzby">Sluzby</a>
+    <div class="topnav">
+    <a href="/">Dodaj ministranta</a>
+    <a href="/msza">Msze</a>
+    <a href="/sluzba">Służby</a>
 </div>
 
 {# Main page#}
 <h1>Msze</h1>
 <form action="msza" method="post">
-    <input type="text" id="dzien_tygodnia" name="dzien_tygodnia" list="dni-tygodnia" />
-    <datalist id="dni-tygodnia">
+    <select id="dzien_tygodnia" name="dzien_tygodnia">
         <option>Poniedziałek</option>
         <option>Wtorek</option>
         <option>Środa</option>
         <option>Czwartek</option>
         <option>Piątek</option>
         <option>Sobota</option>
-        <option>Nieidzela</option>
-    </datalist>
+        <option>Niedziela</option>
+    </select>
     <input type="text" id="godzina" name="godzina">
     <input type="submit" value="Dodaj msze">
 </form>
