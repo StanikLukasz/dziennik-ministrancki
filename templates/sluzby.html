@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Dodaj Sluzbe</title>
-        <style>
+
+    <style>
+        body {
+            background: #F9FAFC;
+            max-width: 1100px;
+            margin: auto;
+        }
+
         {#        Top Nav#}
         .topnav {
             background-color: #333;
@@ -51,11 +58,13 @@
         tr:hover {
             background-color: #f5f5f5;
         }
+
+
     </style>
 </head>
 <body>
 {# Main menu#}
-    <div class="topnav">
+<div class="topnav">
     <a href="/">Dodaj Ministranta</a>
     <a href="/msza">Msze</a>
     <a href="/sluzba">Służby</a>
@@ -64,17 +73,17 @@
 {# Main page#}
 <h1>Służby</h1>
 <form action="sluzba" method="post">
-{#    <input type="text" id="ministrant" name="ministrant" list="ministranci"/>#}
+    {#    <input type="text" id="ministrant" name="ministrant" list="ministranci"/>#}
     <select id="ministrant" name="ministrant">
-    {% for ministrant in ministranci %}
-        <option value="{{ministrant["_id"]}}">{{ ministrant["imie"] }} {{ ministrant["nazwisko"] }}</option>
-    {% endfor %}
+        {% for ministrant in ministranci %}
+            <option value="{{ ministrant["_id"] }}">{{ ministrant["imie"] }} {{ ministrant["nazwisko"] }}</option>
+        {% endfor %}
     </select>
-{#    <input type="text" id="dzien_tygodnia" name="dzien_tygodnia" list="msze-tygodnia"/>#}
+    {#    <input type="text" id="dzien_tygodnia" name="dzien_tygodnia" list="msze-tygodnia"/>#}
     <select id="msza" name="msza">
-    {% for msza in msze %}
-        <option value="{{msza["_id"]}}">{{ msza["dzien_tygodnia"] }} {{ msza["godzina"] }}</option>
-    {% endfor %}
+        {% for msza in msze %}
+            <option value="{{ msza["_id"] }}">{{ msza["dzien_tygodnia"] }} {{ msza["godzina"] }}</option>
+        {% endfor %}
     </select>
     <input type="submit" value="Dodaj służbę">
 </form>
