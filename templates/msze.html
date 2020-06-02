@@ -13,7 +13,8 @@
             <option>Sobota</option>
             <option>Niedziela</option>
         </select>
-        <input type="text" id="godzina" name="godzina">
+        <label for="godzina">Godzina:</label>
+        <input type="text" id="godzina" name="godzina" required pattern="^([0-1][0-9]|2[0-3]):[0-5][0-9]$">
         <input type="submit" value="Dodaj msze">
     </form>
     {#Table #}
